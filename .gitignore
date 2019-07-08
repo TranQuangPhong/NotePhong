@@ -1,0 +1,4 @@
+# Ignore bin & object folders
+
+Note_Phong/Note_Phong/bin/
+Note_Phong/Note_Phong/obj/
