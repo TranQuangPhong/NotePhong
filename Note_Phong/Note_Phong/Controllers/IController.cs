@@ -55,6 +55,14 @@ namespace Note_Phong.Controllers
         Dictionary<int, string> QueryAllChildren (string tableName, int parentId);
 
         /// <summary>
+        /// Query all root forms
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        Dictionary<int, string> QueryAllRoot (string tableName);
+
+        /// <summary>
         /// Insert new record to DB when user creates new form, return true if insert successfully
         /// </summary>
         /// <param name="tableName"></param>Name of table in DB

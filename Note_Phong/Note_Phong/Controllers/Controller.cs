@@ -106,6 +106,24 @@ namespace Note_Phong.Controllers
             return dictionary;
         }
 
+        public Dictionary<int, string> QueryAllRoot (string tableName) {
+            Dictionary<int, string> dictionary = new Dictionary<int, string>();
+            SqlDataReader dr = connFactory.QueryAllRoot(tableName);
+            while ( dr.Read() ) {
+                int columnNameIndex = dr.GetOrdinal("Name");
+                int columnIdIndex = dr.GetOrdinal("Id");
+                try {
+                    string childName = dr.GetString(columnNameIndex);
+                    int childId = dr.GetInt32(columnIdIndex);
+                    dictionary.Add(childId, childName);
+                } catch ( Exception e ) {
+                    MessageBox.Show(e.ToString());
+                }
+            }
+            this.CloseConnection();
+            return dictionary;
+        }
+
         public bool InsertData(string tableName, DBDetailForm dbDetailForm)
         {
             return connFactory.InsertData(tableName, dbDetailForm);

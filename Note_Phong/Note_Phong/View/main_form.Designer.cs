@@ -32,6 +32,7 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.rootTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.childTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.btnTree = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnNew
@@ -92,11 +93,24 @@
             this.childTableLayoutPanel.TabIndex = 3;
             this.childTableLayoutPanel.Tag = "childForms";
             // 
+            // btnTree
+            // 
+            this.btnTree.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnTree.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTree.Location = new System.Drawing.Point(101, 25);
+            this.btnTree.Name = "btnTree";
+            this.btnTree.Size = new System.Drawing.Size(75, 40);
+            this.btnTree.TabIndex = 19;
+            this.btnTree.Text = "Tree";
+            this.btnTree.UseVisualStyleBackColor = true;
+            this.btnTree.Click += new System.EventHandler(this.btnTree_Click);
+            // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1202, 733);
+            this.Controls.Add(this.btnTree);
             this.Controls.Add(this.childTableLayoutPanel);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.rootTableLayoutPanel);
@@ -114,6 +128,7 @@
         private System.Windows.Forms.Button btnNew;
         internal System.Windows.Forms.TableLayoutPanel rootTableLayoutPanel;
         internal System.Windows.Forms.TableLayoutPanel childTableLayoutPanel;
+        private System.Windows.Forms.Button btnTree;
 
     }
 }

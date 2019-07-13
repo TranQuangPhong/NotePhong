@@ -45,12 +45,20 @@ namespace Note_Phong.CommonLibrary
         SqlDataReader QueryParentName (string tableName, int parentId);
 
         /// <summary>
-        /// 
+        /// Query all children
         /// </summary>
         /// <param name="tableName"></param>
         /// <param name="parentId"></param>
         /// <returns></returns>
         SqlDataReader QueryAllChildren (string tableName, int parentId);
+
+        /// <summary>
+        /// Query all root forms
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        SqlDataReader QueryAllRoot (string tableName);
 
         /// <summary>
         /// Insert new record to DB when user creates new form, return true if insert successfully

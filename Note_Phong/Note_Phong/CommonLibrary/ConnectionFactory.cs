@@ -97,7 +97,21 @@ namespace Note_Phong.CommonLibrary {
             try {
                 string sqlString = "select Name, Id from " + tableName + " where ParentId = @ParentId";
                 sqlCmd = new SqlCommand(sqlString, conn);
-                sqlCmd.Parameters.Add("@ParentId", SqlDbType.NVarChar).Value = parentId;
+                sqlCmd.Parameters.Add("@ParentId", SqlDbType.Int).Value = parentId;
+                dataReader = sqlCmd.ExecuteReader();
+            } catch ( Exception e ) {
+                MessageBox.Show(e.ToString());
+            }
+
+            return dataReader;
+        }
+
+        public SqlDataReader QueryAllRoot (string tableName) {
+            this.OpenConnection();
+            try {
+                string sqlString = "select Name, Id from " + tableName + " where ParentId = @DefaultParentId";
+                sqlCmd = new SqlCommand(sqlString, conn);
+                sqlCmd.Parameters.Add("@DefaultParentId", SqlDbType.Int).Value = -1;
                 dataReader = sqlCmd.ExecuteReader();
             } catch ( Exception e ) {
                 MessageBox.Show(e.ToString());

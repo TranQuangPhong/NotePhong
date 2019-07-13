@@ -28,14 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.treeView = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
-            // tree_form
+            // treeView
+            // 
+            this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeView.ForeColor = System.Drawing.Color.Black;
+            this.treeView.HotTracking = true;
+            this.treeView.Indent = 30;
+            this.treeView.ItemHeight = 25;
+            this.treeView.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(180)))), ((int)(((byte)(209)))));
+            this.treeView.Location = new System.Drawing.Point(0, 0);
+            this.treeView.Name = "treeView";
+            this.treeView.Size = new System.Drawing.Size(1213, 773);
+            this.treeView.TabIndex = 0;
+            this.treeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView_MouseDoubleClick);
+            // 
+            // Tree_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1213, 773);
-            this.Name = "tree_form";
+            this.Controls.Add(this.treeView);
+            this.Name = "Tree_form";
             this.Text = "Tree";
             this.Load += new System.EventHandler(this.tree_form_Load);
             this.ResumeLayout(false);
@@ -43,6 +60,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.TreeView treeView;
 
     }
 }

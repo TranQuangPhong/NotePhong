@@ -15,7 +15,6 @@ using Note_Phong.Utils;
 namespace Note_Phong.View {
     public partial class Main_form : Form {
         CreateNew_form createNew_form;
-        //Detail_form detail_form;
         Controller controller;
         DBDetailForm dbDetailForm;
 
@@ -29,7 +28,6 @@ namespace Note_Phong.View {
         }
 
         private void Main_form_Load (object sender, EventArgs e) {
-            //TODO: Load DB to show UI
             List<DBDetailForm> listDb = controller.QueryAllData(DBDetailForm.DB_TABLE_NAME);
             foreach(DBDetailForm db in listDb){
                 if ( db.Id < 10 ) {
@@ -37,7 +35,6 @@ namespace Note_Phong.View {
                 } else {
                     AddUI(TABLE_LAYOUT_PANEL_TAG_CHILD, db);
                 }
-                
             }
         }
 
@@ -47,6 +44,12 @@ namespace Note_Phong.View {
             createNew_form.eBtnOK_Click += new EventHandler<MyEventArgs>(eCreateNew_BtnOK_Click);
             createNew_form.Show();
         }//End btnNew_Click()
+
+        private void btnTree_Click (object sender, EventArgs e) {
+            Tree_form tree = new Tree_form();
+            tree.eNew_Instance_Created += new EventHandler(eDetail_New_Instance_Created);
+            tree.Show();
+        }
 
         public void btnForm_Click (object sender, EventArgs e) { //Enter detail_form
 
@@ -189,6 +192,8 @@ namespace Note_Phong.View {
                     }
                 }
             }
-        }//End RemoveUI()
+        }
+
+        //End RemoveUI()
     }
 }
