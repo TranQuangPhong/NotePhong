@@ -30,6 +30,15 @@ namespace Note_Phong.View {
 
         private void Main_form_Load (object sender, EventArgs e) {
             //TODO: Load DB to show UI
+            List<DBDetailForm> listDb = controller.QueryAllData(DBDetailForm.DB_TABLE_NAME);
+            foreach(DBDetailForm db in listDb){
+                if ( db.Id < 10 ) {
+                    AddUI(TABLE_LAYOUT_PANEL_TAG_ROOT, db);
+                } else {
+                    AddUI(TABLE_LAYOUT_PANEL_TAG_CHILD, db);
+                }
+                
+            }
         }
 
         private void btnNew_Click (object sender, EventArgs e) {
@@ -90,7 +99,7 @@ namespace Note_Phong.View {
 
             //Insert DB & add UI
             if ( controller.InsertData(DBDetailForm.DB_TABLE_NAME, dbDetailForm) ) {
-                AddUI(TABLE_LAYOUT_PANEL_TAG_ROOT);
+                AddUI(TABLE_LAYOUT_PANEL_TAG_ROOT, dbDetailForm);
                 createNew_form.eBtnOK_Click -= new EventHandler<MyEventArgs>(eCreateNew_BtnOK_Click);
                 createNew_form.Close(); //Only close when there's no exception
             }
@@ -103,12 +112,9 @@ namespace Note_Phong.View {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void eDetail_Complete_Creating_Child (object sender, MyEventArgs e) {
-            //((Detail_form)sender).eDelete_Click += new EventHandler<MyEventArgs>(eDetail_BtnDelete_Click);
-            //Set id & name for input arg 'dbDetailForm'
             dbDetailForm.Id = e.Id;
             dbDetailForm.Name = e.Name;
-
-            AddUI(TABLE_LAYOUT_PANEL_TAG_CHILD);
+            AddUI(TABLE_LAYOUT_PANEL_TAG_CHILD, dbDetailForm);
         }
 
         /// <summary>
@@ -131,7 +137,7 @@ namespace Note_Phong.View {
         /// </summary>
         /// <param name="tag"></param>Tag of the object need to be deleted
         /// <returns></returns>
-        private void AddUI (string tag) {
+        private void AddUI (string tag, DBDetailForm dbDetailForm) {
             Panel panel = new Panel();
             panel.Dock = DockStyle.Fill;
             //Create 2 buttons to add to Panel
@@ -158,9 +164,9 @@ namespace Note_Phong.View {
             btnDelete.Click += new EventHandler(btnDelete_Click);
 
             //Main_form currentMain = (Main_form)Application.OpenForms["main_form"];
-            foreach ( Control item in this.Controls ) {
-                if ( item is TableLayoutPanel && item.Tag == tag ) {
-                    item.Controls.Add(panel);
+            foreach ( Control tbLayoutP in this.Controls.OfType<TableLayoutPanel>() ) {
+                if ( tbLayoutP.Tag == tag ) {
+                    tbLayoutP.Controls.Add(panel);
                     panel.Controls.Add(btnDelete); //btnDelete is over btnForm
                     panel.Controls.Add(btnForm);
                     break;
@@ -177,13 +183,9 @@ namespace Note_Phong.View {
         private void RemoveUI (int tag) {
             //Remove the panel containing btnForm & btnDelete
             foreach ( Control tbLayoutP in this.Controls.OfType<TableLayoutPanel>() ) {
-                foreach ( Control item in tbLayoutP.Controls ) {
-                    if ( item is Panel ) {
-                        foreach ( Button subItem in item.Controls ) {
-                            if ( subItem.Tag.ToString().StartsWith(tag.ToString()) /*( int )subItem.Tag == tag*/ ) {
-                                tbLayoutP.Controls.Remove(item);
-                            }
-                        }
+                foreach ( Control panel in tbLayoutP.Controls.OfType<Panel>().Reverse() ) { //Must use Reverse() method
+                    if ( panel.Tag.ToString().StartsWith(tag.ToString()) ) {
+                        panel.Dispose();
                     }
                 }
             }

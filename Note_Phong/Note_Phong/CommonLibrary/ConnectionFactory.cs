@@ -51,7 +51,7 @@ namespace Note_Phong.CommonLibrary {
             }
         }
 
-        public SqlDataReader QueryData (string tableName) {
+        public SqlDataReader QueryAllData (string tableName) {
             this.OpenConnection();
             try {
                 string sqlString = "select * from " + tableName;

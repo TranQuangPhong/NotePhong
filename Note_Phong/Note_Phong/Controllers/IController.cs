@@ -24,11 +24,11 @@ namespace Note_Phong.Controllers
         void CloseConnection();
 
         /// <summary>
-        /// Query all DB & return a SqlDatareader
+        /// Query all DB & return a list of DBDetailForm objects
         /// </summary>
         /// <param name="tableName"></param>Name of table in DB
-        /// <returns>dr</returns>SqlDataReader
-        SqlDataReader QueryData(string tableName);
+        /// <returns>dr</returns>List<DBDetailForm>
+        List<DBDetailForm> QueryAllData (string tableName);
 
         /// <summary>
         /// Query DB with specific Id & return a DBDetailForm object

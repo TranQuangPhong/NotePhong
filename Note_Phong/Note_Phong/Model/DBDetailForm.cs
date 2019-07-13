@@ -46,6 +46,16 @@ namespace Note_Phong.Model
             TaskList = "Task list+";
             ParentId = -1;
         }
-
+        public DBDetailForm (DBDetailForm db) {
+            Name = db.Name;
+            Id = db.Id;
+            Level = db.Level;
+            //StartDate = DateTimePicker.MinimumDateTime; //default value
+            Deadline = db.Deadline;
+            Status = db.Status;
+            Description = db.Description;
+            TaskList = db.TaskList;
+            ParentId = db.ParentId;
+        }
     }
 }

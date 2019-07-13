@@ -26,7 +26,7 @@ namespace Note_Phong.CommonLibrary
         /// </summary>
         /// <param name="tableName"></param>Name of table in DB
         /// <returns>dr</returns>SqlDataReader
-        SqlDataReader QueryData(string tableName);
+        SqlDataReader QueryAllData(string tableName);
 
         /// <summary>
         /// Query DB with specific Id & return a SqlDatareader

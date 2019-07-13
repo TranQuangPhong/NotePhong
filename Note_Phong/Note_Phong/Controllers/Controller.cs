@@ -32,9 +32,26 @@ namespace Note_Phong.Controllers
             connFactory.CloseConnection();
         }
 
-        public SqlDataReader QueryData(string tableName)
+        public List<DBDetailForm> QueryAllData(string tableName)
         {
-            return connFactory.QueryData(tableName);
+            List<DBDetailForm> listDb = new List<DBDetailForm>();
+            SqlDataReader dr = connFactory.QueryAllData(tableName);
+            DBDetailForm db = new DBDetailForm();
+            while ( dr.Read() ) {
+                db.Name = this.GetName(dr);
+                db.Id = this.GetId(dr);
+                db.Level = this.GetLevel(dr);
+                db.Deadline = this.GetDeadline(dr);
+                db.Status = this.GetStatus(dr);
+                db.Description = this.GetDescription(dr);
+                db.TaskList = this.GetTaskList(dr);
+                db.ParentId = this.GetParentId(dr);
+
+                listDb.Add(new DBDetailForm(db));
+            }
+            this.CloseConnection();
+
+            return listDb;
         }
 
         public DBDetailForm QueryDataWithId(string tableName, DBDetailForm dbDetailForm)
@@ -118,6 +135,17 @@ namespace Note_Phong.Controllers
                     MessageBox.Show(e.ToString());
                 }
             return name;
+        }
+
+        int GetId (SqlDataReader dr) {
+            int Id = -1;
+            try {
+                int columnIndex = dr.GetOrdinal("Id");
+                Id = dr.GetInt32(columnIndex);
+            } catch ( Exception e ) {
+                MessageBox.Show(e.ToString());
+            }
+            return Id;
         }
 
         int GetLevel(SqlDataReader dr)
